@@ -1,7 +1,7 @@
-part of 'auth_bloc.dart';
+part of 'signup_bloc.dart';
 
-class AuthState extends Equatable {
-  const AuthState({
+class SignupState extends Equatable {
+  const SignupState({
     this.status = FormzStatus.pure,
     this.collegeMail = const CollegeMail.pure(),
     this.rollNumber = const RollNumber.pure(),
@@ -15,14 +15,14 @@ class AuthState extends Equatable {
   final Password password;
   final String errorMessage;
 
-  AuthState copyWith({
+  SignupState copyWith({
     FormzStatus? status,
     CollegeMail? collegeMail,
     RollNumber? rollNumber,
     Password? password,
     String? errorMessage,
   }) {
-    return AuthState(
+    return SignupState(
       status: status ?? this.status,
       collegeMail: collegeMail ?? this.collegeMail,
       rollNumber: rollNumber ?? this.rollNumber,

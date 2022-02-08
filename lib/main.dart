@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory/auth/auth.dart';
 import 'package:inventory/qr_page.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Auth(),
     );
   }
 }

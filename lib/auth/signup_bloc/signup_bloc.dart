@@ -4,23 +4,22 @@ import 'package:formz/formz.dart';
 import 'package:inventory/models/models.dart';
 import 'package:inventory_repository/inventory_repository.dart';
 
-part 'auth_event.dart';
-part 'auth_state.dart';
+part 'signup_event.dart';
+part 'signup_state.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc({required this.student}) : super(const AuthState()) {
-    on<AuthCollegeMailChanged>(_onCollegeMailChanged);
-    on<AuthPasswordChanged>(_onPasswordChanged);
-    on<AuthRollNumberChanged>(_onRollNumberChanged);
-    on<SignupFormSubmitted>(_onSignupSubmitted);
-    on<LoginFormSubmitted>(_onLoginSubmitted);
+class SignupBloc extends Bloc<SignupEvent, SignupState> {
+  SignupBloc({required this.student}) : super(const SignupState()) {
+    on<SignupCollegeMailChanged>(_onCollegeMailChanged);
+    on<SignupRollNumberChanged>(_onRollNumberChanged);
+    on<SignupPasswordChanged>(_onPasswordChanged);
+    on<SignupFormSubmitted>(_onSubmitted);
   }
 
   Student student;
 
   void _onCollegeMailChanged(
-    AuthCollegeMailChanged event,
-    Emitter<AuthState> emit,
+    SignupCollegeMailChanged event,
+    Emitter<SignupState> emit,
   ) {
     final collegeMail = CollegeMail.dirty(event.collegeMail);
     emit(
@@ -29,6 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         status: Formz.validate(
           <FormzInput>[
             collegeMail,
+            state.rollNumber,
             state.password,
           ],
         ),
@@ -37,8 +37,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _onRollNumberChanged(
-    AuthRollNumberChanged event,
-    Emitter<AuthState> emit,
+    SignupRollNumberChanged event,
+    Emitter<SignupState> emit,
   ) {
     final rollNumber = RollNumber.dirty(event.rollNumber);
     emit(
@@ -56,8 +56,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _onPasswordChanged(
-    AuthPasswordChanged event,
-    Emitter<AuthState> emit,
+    SignupPasswordChanged event,
+    Emitter<SignupState> emit,
   ) {
     final password = Password.dirty(event.password);
     emit(
@@ -66,6 +66,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         status: Formz.validate(
           <FormzInput>[
             password,
+            state.rollNumber,
             state.collegeMail,
           ],
         ),
@@ -73,21 +74,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  void _onSignupSubmitted(
+  void _onSubmitted(
     SignupFormSubmitted event,
-    Emitter<AuthState> emit,
+    Emitter<SignupState> emit,
   ) async {
-    emit(
-      state.copyWith(
-        status: Formz.validate(
-          <FormzInput>[
-            state.password,
-            state.collegeMail,
-            state.rollNumber,
-          ],
-        ),
-      ),
-    );
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
     }
@@ -98,47 +88,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         rollNumber: state.rollNumber.toString(),
       );
       await student.signup();
-      emit(state.copyWith(status: FormzStatus.submissionSuccess));
-    } on APIRequestError catch (e) {
-      emit(
-        state.copyWith(
-          errorMessage: e.message,
-          status: FormzStatus.submissionFailure,
-        ),
-      );
-    } catch (_) {
-      emit(
-        state.copyWith(
-          errorMessage: 'Unknown error occured',
-          status: FormzStatus.submissionFailure,
-        ),
-      );
-    }
-  }
-
-  void _onLoginSubmitted(
-    LoginFormSubmitted event,
-    Emitter<AuthState> emit,
-  ) async {
-    emit(
-      state.copyWith(
-        status: Formz.validate(
-          <FormzInput>[
-            state.password,
-            state.collegeMail,
-          ],
-        ),
-      ),
-    );
-    if (state.status.isValidated) {
-      emit(state.copyWith(status: FormzStatus.submissionInProgress));
-    }
-    try {
-      student = student.copyWith(
-        collegeMail: state.collegeMail.toString(),
-        password: state.password.toString(),
-      );
-      await student.login();
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on APIRequestError catch (e) {
       emit(
