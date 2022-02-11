@@ -20,7 +20,9 @@ class Admin {
     this.adminName = '',
     this.adminPassword = '',
     this.token = '',
-  });
+  }) {
+    _updateToken(token: token);
+  }
   Admin copyWith({
     String? adminName,
     String? adminPassword,
@@ -31,6 +33,12 @@ class Admin {
       adminPassword: adminPassword ?? this.adminPassword,
       token: token ?? this.token,
     );
+  }
+
+  Future<String> getToken() async {
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    final String token = _prefs.getString('token') ?? '';
+    return token;
   }
 
   Future<dynamic> login() async {

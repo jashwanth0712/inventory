@@ -80,29 +80,41 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   ) async {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
-    }
-    try {
-      student = student.copyWith(
-        collegeMail: state.collegeMail.toString(),
-        password: state.password.toString(),
-        rollNumber: state.rollNumber.toString(),
-      );
-      await student.signup();
-      emit(state.copyWith(status: FormzStatus.submissionSuccess));
-    } on APIRequestError catch (e) {
-      emit(
-        state.copyWith(
-          errorMessage: e.message,
-          status: FormzStatus.submissionFailure,
-        ),
-      );
-    } catch (_) {
-      emit(
-        state.copyWith(
-          errorMessage: 'Unknown error occured',
-          status: FormzStatus.submissionFailure,
-        ),
-      );
+      try {
+        student = student.copyWith(
+          collegeMail: state.collegeMail.value,
+          password: state.password.value,
+          rollNumber: state.rollNumber.value,
+        );
+        await student.signup();
+        emit(state.copyWith(status: FormzStatus.submissionSuccess));
+      } on APIRequestError catch (e) {
+        emit(
+          state.copyWith(
+            errorMessage: e.message,
+            status: FormzStatus.submissionFailure,
+          ),
+        );
+      } catch (_) {
+        emit(
+          state.copyWith(
+            errorMessage: 'Unknown error occured',
+            status: FormzStatus.submissionFailure,
+          ),
+        );
+      }
+    } else {
+      emit(state.copyWith(
+          collegeMail: state.collegeMail,
+          password: state.password,
+          rollNumber: state.rollNumber,
+          status: Formz.validate(
+            <FormzInput>[
+              state.password,
+              state.collegeMail,
+              state.rollNumber,
+            ],
+          )));
     }
   }
 }
