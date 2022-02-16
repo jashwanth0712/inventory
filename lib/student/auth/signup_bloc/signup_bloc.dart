@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:inventory/models/models.dart';
+import 'package:inventory/student/models/models.dart';
 import 'package:inventory_repository/inventory_repository.dart';
 
 part 'signup_event.dart';
@@ -104,10 +104,13 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         );
       }
     } else {
+      const collegeMail = CollegeMail.dirty('');
+      const password = Password.dirty('');
+      const rollNumber = RollNumber.dirty('');
       emit(state.copyWith(
-          collegeMail: state.collegeMail,
-          password: state.password,
-          rollNumber: state.rollNumber,
+          collegeMail: collegeMail,
+          password: password,
+          rollNumber: rollNumber,
           status: Formz.validate(
             <FormzInput>[
               state.password,

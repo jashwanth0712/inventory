@@ -11,6 +11,10 @@ class Validators {
     return rollNumber.length >= 5;
   }
 
+  static isValidAdminName(String adminName) {
+    return adminName.length >= 4;
+  }
+
   static isValidPassword(String password) {
     return password.length >= 8;
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inventory/auth/auth.dart';
+import 'package:inventory/admin/login/admin_login.dart';
+import 'package:inventory/student/auth/auth.dart';
 import 'package:inventory/qr_page.dart';
 import 'package:inventory/routes/routes.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: Auth.route,
+      initialRoute: AdminLogin.route,
       onGenerateRoute: (route) => generateAppRoute(route),
     );
   }
