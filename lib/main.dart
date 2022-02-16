@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:inventory/auth/auth.dart';
 import 'package:inventory/qr_page.dart';
+import 'package:inventory/routes/routes.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -24,7 +27,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: Auth.route,
+      onGenerateRoute: (route) => generateAppRoute(route),
     );
   }
 }
@@ -105,20 +109,26 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const qrscan()),
                   );
                 },
                 child: Container(
-                  height:50,
+                  height: 50,
                   width: 150,
-                  child: Center(child: Text('QR',style: TextStyle(color: Colors.white,fontWeight:FontWeight.bold,fontSize: 20 ),)),
+                  child: Center(
+                      child: Text(
+                    'QR',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  )),
                   decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.all(Radius.circular(25))
-                  ),
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(Radius.circular(25))),
                 ),
               ),
             )

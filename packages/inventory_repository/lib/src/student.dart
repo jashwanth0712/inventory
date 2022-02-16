@@ -17,7 +17,14 @@ class Student {
     this.collegeMail = '',
     this.password = '',
     this.token = '',
-  });
+  }) {
+    auth = auth.copyWith(
+      rollNumber: rollNumber,
+      collegeMail: collegeMail,
+      password: password,
+      token: token,
+    );
+  }
 
   Student copyWith(
       {String? rollNumber,
@@ -36,6 +43,12 @@ class Student {
       password: password ?? this.password,
       token: token ?? this.token,
     );
+  }
+
+  Future<String> getToken() async {
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    final String token = _prefs.getString('token') ?? '';
+    return token;
   }
 
   Future<dynamic> login() async {
