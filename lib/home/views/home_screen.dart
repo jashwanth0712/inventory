@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory/auth/auth.dart';
+import 'package:inventory/student/auth/auth.dart';
 import 'package:inventory/constants.dart';
 
 class HomeScreen extends StatelessWidget {

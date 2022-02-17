@@ -1,31 +1,31 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:inventory/models/models.dart';
+import 'package:inventory/admin/models/models.dart';
 import 'package:inventory_repository/inventory_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({required this.student}) : super(const LoginState()) {
-    on<LoginCollegeMailChanged>(_onCollegeMailChanged);
+  LoginBloc({required this.admin}) : super(const LoginState()) {
+    on<LoginAdminNameChanged>(_onAdminNameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginFormSubmitted>(_onSubmitted);
   }
-  Student student;
 
-  void _onCollegeMailChanged(
-    LoginCollegeMailChanged event,
+  Admin admin;
+  void _onAdminNameChanged(
+    LoginAdminNameChanged event,
     Emitter<LoginState> emit,
   ) {
-    final collegeMail = CollegeMail.dirty(event.collegeMail);
+    final adminName = AdminName.dirty(event.adminName);
     emit(
       state.copyWith(
-        collegeMail: collegeMail,
+        adminName: adminName,
         status: Formz.validate(
           <FormzInput>[
-            collegeMail,
+            adminName,
             state.password,
           ],
         ),
@@ -44,7 +44,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         status: Formz.validate(
           <FormzInput>[
             password,
-            state.collegeMail,
+            state.adminName,
           ],
         ),
       ),
@@ -58,11 +58,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
-        student = student.copyWith(
-          collegeMail: state.collegeMail.value,
-          password: state.password.value,
+        admin = admin.copyWith(
+          adminName: state.adminName.value,
+          adminPassword: state.password.value,
         );
-        await student.login();
+        await admin.login();
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
       } on APIRequestError catch (e) {
         emit(
@@ -80,13 +80,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         );
       }
     } else {
+      const adminName = AdminName.dirty('');
+      const password = Password.dirty('');
+
       emit(state.copyWith(
-          collegeMail: state.collegeMail,
-          password: state.password,
+          adminName: adminName,
+          password: password,
           status: Formz.validate(
             <FormzInput>[
               state.password,
-              state.collegeMail,
+              state.adminName,
             ],
           )));
     }

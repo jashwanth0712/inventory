@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory/auth/views/auth_screen.dart';
+import 'package:inventory/student/auth/views/auth_screen.dart';
 
 class Auth extends StatelessWidget {
   static const route = '/auth';

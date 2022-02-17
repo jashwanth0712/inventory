@@ -1,7 +1,7 @@
 import 'package:blobs/blobs.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory/auth/components/login_form.dart';
-import 'package:inventory/auth/components/signup_form.dart';
+import 'package:inventory/student/auth/components/login_form.dart';
+import 'package:inventory/student/auth/components/signup_form.dart';
 import 'package:inventory/constants.dart';
 import 'package:lottie/lottie.dart';
 

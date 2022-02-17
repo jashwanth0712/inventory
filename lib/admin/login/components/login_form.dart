@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:inventory/auth/login_bloc/login_bloc.dart';
+import 'package:inventory/admin/login/bloc/login_bloc.dart';
 import 'package:inventory/constants.dart';
 import 'package:inventory/home/home.dart';
 import 'package:inventory_repository/inventory_repository.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({Key? key}) : super(key: key);
-  final Student _student = Student();
+  final Admin _admin = Admin();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginBloc(student: _student),
+      create: (context) => LoginBloc(admin: _admin),
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state.status.isSubmissionFailure) {
@@ -75,50 +75,49 @@ class LoginForm extends StatelessWidget {
           }
         },
         child: Form(
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: Text(
-                      "Welcome back!",
-                      style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w700),
-                    ),
+            child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
                   ),
-                  CollegeMailInput(),
-                  SizedBox(
-                    height: 20,
+                  child: Text(
+                    "Admin Login!",
+                    style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700),
                   ),
-                  PasswordInput(),
-                  SizedBox(
-                    height: 20,
+                ),
+                AdminNameInput(),
+                SizedBox(
+                  height: 20,
+                ),
+                PasswordInput(),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: Text("Forgot Password?"),
-                  )
-                ],
-              ),
-              const LoginButton(),
-            ],
-          ),
-        ),
+                  child: Text("Forgot Password?"),
+                )
+              ],
+            ),
+            const LoginButton(),
+          ],
+        )),
       ),
     );
   }
 }
 
-class CollegeMailInput extends StatelessWidget {
-  const CollegeMailInput({Key? key}) : super(key: key);
+class AdminNameInput extends StatelessWidget {
+  const AdminNameInput({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -130,17 +129,16 @@ class CollegeMailInput extends StatelessWidget {
           child: TextField(
             onChanged: (val) {
               context.read<LoginBloc>().add(
-                    LoginCollegeMailChanged(val),
+                    LoginAdminNameChanged(val),
                   );
             },
             decoration: AppTextFields.minimalTextFieldDecoration.copyWith(
-              labelText: 'Mail ID',
-              errorText:
-                  state.collegeMail.invalid ? '💥 Invalid mail ID' : null,
-              hintText: 'Enter your college mail ID',
+              labelText: 'Admin Name',
+              errorText: state.adminName.invalid ? '💥 Invalid admin' : null,
+              hintText: 'Enter your name',
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: state.collegeMail.valid
+                  color: state.adminName.valid
                       ? Colors.green.shade400
                       : AppColors.primaryColor,
                   width: 3.0,
@@ -227,7 +225,7 @@ class LoginButton extends StatelessWidget {
             onTap: (() {
               context.read<LoginBloc>().add(
                     LoginFormSubmitted(
-                      state.collegeMail.value,
+                      state.adminName.value,
                       state.password.value,
                     ),
                   );
