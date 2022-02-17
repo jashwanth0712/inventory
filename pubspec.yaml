@@ -27,19 +27,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  barcode_scan: ^3.0.1
   blobs: ^2.0.0
-  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
 
-<<<<<<< HEAD
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   #qr_code_scanner: ^0.6.1
-=======
   inventory_repository:
     path: packages/inventory_repository
   http: ^0.13.4
@@ -48,16 +44,15 @@ dependencies:
   flutter_bloc: ^8.0.1
   formz: ^0.4.1
   equatable: ^2.0.3
+  liquid_swipe: ^2.1.0
 
->>>>>>> 91a3005dc0f842b36f55b70be4ad54e1e2bce108
+
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-# The following section is specific to Flutter.
+
 flutter:
 
   # The following line ensures that the Material Icons font is
