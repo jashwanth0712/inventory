@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class qrscan extends StatefulWidget {
   const qrscan({Key? key}) : super(key: key);
 
@@ -23,3 +22,5 @@ class _qrscanState extends State<qrscan> {
     );
   }
 }
+
+
