@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:inventory/admin/login/view/login_screen.dart';
 import 'package:inventory/admin/login/components/login_form.dart';
+import 'package:inventory/student/auth/components/login_form.dart';
+import 'package:inventory/student/auth/components/signup_form.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:lottie/lottie.dart';
 import 'top_bar.dart';
+import 'constants.dart';
 final pages = [
   Scaffold(
     backgroundColor: Colors.red.shade50,
@@ -29,9 +32,50 @@ final pages = [
       ],
     )
   ),
-  Scaffold(
-    backgroundColor: Colors.black,
-    body: TopBar(Colors.blueAccent,Colors.blueAccent.shade100,Colors.blueAccent.withOpacity(0.5)),
+  DefaultTabController(
+    length:2,
+    child: Scaffold(
+      backgroundColor: Colors.blue.shade50,
+      body:Stack(children: [
+        TopBar(Colors.blueAccent,Colors.blueAccent.shade100,Colors.blueAccent.withOpacity(0.5)),
+        Column(mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                child: TabBar(
+                  labelColor: Colors.black,
+                  indicatorColor: AppColors.primaryColor,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  unselectedLabelColor: Colors.grey,
+                  tabs: [
+                    Tab(
+                      text: 'Login',
+                    ),
+                    Tab(
+                      text: 'Signup',
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 400,
+              child: TabBarView(
+                children: [
+                  SLoginForm(),
+                  SignupForm(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],),
+    ),
   ),
   Scaffold(
     backgroundColor: Colors.lightGreen.shade50,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory/admin/login/admin_login.dart';
+import 'package:inventory/login_signup.dart';
 import 'package:inventory/student/auth/auth.dart';
 import 'package:inventory/animations/slide_page.dart';
 import 'package:inventory/home/home.dart';
@@ -14,7 +15,7 @@ Route generateAppRoute(RouteSettings settings) {
       );
     case AdminLogin.route:
       return SlidePageRoute(
-        child: const AdminLogin(),
+        child: const toggler(),
         duration: const Duration(milliseconds: 300),
         settings: settings,
       );

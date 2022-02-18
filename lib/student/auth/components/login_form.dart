@@ -6,8 +6,8 @@ import 'package:inventory/constants.dart';
 import 'package:inventory/home/home.dart';
 import 'package:inventory_repository/inventory_repository.dart';
 
-class LoginForm extends StatelessWidget {
-  LoginForm({Key? key}) : super(key: key);
+class SLoginForm extends StatelessWidget {
+  SLoginForm({Key? key}) : super(key: key);
   final Student _student = Student();
   @override
   Widget build(BuildContext context) {

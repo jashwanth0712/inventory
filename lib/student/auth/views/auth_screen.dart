@@ -70,7 +70,7 @@ class AuthScreen extends StatelessWidget {
                   height: 400,
                   child: TabBarView(
                     children: [
-                      LoginForm(),
+                      SLoginForm(),
                       SignupForm(),
                     ],
                   ),
