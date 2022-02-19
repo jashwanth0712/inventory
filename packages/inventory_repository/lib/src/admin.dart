@@ -35,10 +35,11 @@ class Admin {
     );
   }
 
-  Future<String> getToken() async {
+  Future<Admin> getToken() async {
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     final String token = _prefs.getString('token') ?? '';
-    return token;
+    final Admin admin = copyWith(token: token);
+    return admin;
   }
 
   Future<dynamic> login() async {

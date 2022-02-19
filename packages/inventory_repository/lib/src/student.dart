@@ -45,10 +45,11 @@ class Student {
     );
   }
 
-  Future<String> getToken() async {
+  Future<Student> getToken() async {
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     final String token = _prefs.getString('token') ?? '';
-    return token;
+    final Student student = copyWith(token: token);
+    return student;
   }
 
   Future<dynamic> login() async {

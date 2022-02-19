@@ -1,7 +1,7 @@
 part of './../admin.dart';
 
 class Notice {
-  final String url = '/notice';
+  final String url = URL.base + URL.admin + '/notice';
   final String token;
   Notice({
     this.token = '',
@@ -36,7 +36,7 @@ class Notice {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -55,7 +55,7 @@ class Notice {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -85,7 +85,7 @@ class Notice {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -106,7 +106,7 @@ class Notice {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
