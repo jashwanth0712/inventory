@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory/admin/login/admin_login.dart';
 import 'package:inventory/routes/routes.dart';
+import 'package:provider/provider.dart';
+
+import 'admin/notice/notice.dart';
+import 'admin/providers/notice_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => NoticeProvider(),
+        )
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +33,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      initialRoute: AdminLogin.route,
+      initialRoute: Notice.route,
       onGenerateRoute: (route) => generateAppRoute(route),
     );
   }

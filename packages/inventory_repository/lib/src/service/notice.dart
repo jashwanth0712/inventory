@@ -16,8 +16,8 @@ class Notice {
   }
 
   Future<dynamic> create({
-    required String productName,
-    required bool isAvailable,
+    required String title,
+    required String description,
   }) async {
     final Uri parsedUrl = Uri.parse(url);
     var response = await http.post(
@@ -29,8 +29,8 @@ class Notice {
       },
       body: jsonEncode(
         <String, String?>{
-          'productName': productName,
-          'isAvailable': isAvailable.toString(),
+          'title': title,
+          'description': description,
         },
       ),
     );

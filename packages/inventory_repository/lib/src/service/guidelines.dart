@@ -16,8 +16,8 @@ class Guidelines {
   }
 
   Future<dynamic> create({
-    required String productName,
-    required bool isAvailable,
+    required String title,
+    required List<String> description,
   }) async {
     final Uri parsedUrl = Uri.parse(url);
     var response = await http.post(
@@ -28,9 +28,9 @@ class Guidelines {
         'Authorization': 'Bearer $token'
       },
       body: jsonEncode(
-        <String, String?>{
-          'productName': productName,
-          'isAvailable': isAvailable.toString(),
+        <String, dynamic>{
+          'title': title,
+          'description': description,
         },
       ),
     );

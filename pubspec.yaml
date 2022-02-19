@@ -40,6 +40,7 @@ dependencies:
     path: packages/inventory_repository
   liquid_swipe: ^2.1.0
   lottie: ^1.2.1
+  provider: ^6.0.2
   shared_preferences: ^2.0.12
 
 dev_dependencies:
