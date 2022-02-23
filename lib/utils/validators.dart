@@ -15,6 +15,10 @@ class Validators {
     return adminName.length >= 4;
   }
 
+  static isNotEmpty(String val) {
+    return val.isNotEmpty;
+  }
+
   static isValidPassword(String password) {
     return password.length >= 8;
   }

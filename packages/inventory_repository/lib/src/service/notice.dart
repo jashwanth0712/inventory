@@ -1,7 +1,7 @@
 part of './../admin.dart';
 
 class Notice {
-  final String url = '/notice';
+  final String url = URL.base + URL.admin + '/notice';
   final String token;
   Notice({
     this.token = '',
@@ -16,8 +16,8 @@ class Notice {
   }
 
   Future<dynamic> create({
-    required String productName,
-    required bool isAvailable,
+    required String title,
+    required String description,
   }) async {
     final Uri parsedUrl = Uri.parse(url);
     var response = await http.post(
@@ -29,14 +29,14 @@ class Notice {
       },
       body: jsonEncode(
         <String, String?>{
-          'productName': productName,
-          'isAvailable': isAvailable.toString(),
+          'title': title,
+          'description': description,
         },
       ),
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -55,7 +55,7 @@ class Notice {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -85,7 +85,7 @@ class Notice {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -106,7 +106,7 @@ class Notice {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);

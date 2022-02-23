@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:inventory/admin/login/components/login_form.dart';
 import 'package:inventory/constants.dart';
 import 'package:lottie/lottie.dart';
-import 'package:inventory/login_signup.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,7 +13,6 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: AppColors.secondaryColor,
       body: Stack(
         children: [
-
           Positioned(
             top: -100,
             right: -100,
@@ -37,27 +35,6 @@ class LoginScreen extends StatelessWidget {
           ),
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 58.0),
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const toggler()),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.all(Radius.circular(50))
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("option"),
-                    ),
-                  ),
-                ),
-              ),
               Flexible(
                 child: Lottie.network(
                   'https://assets3.lottiefiles.com/packages/lf20_1pxqjqps.json',

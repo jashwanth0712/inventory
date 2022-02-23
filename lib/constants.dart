@@ -9,13 +9,12 @@ mixin AppTextFields {
   static InputDecoration minimalTextFieldDecoration = InputDecoration(
     focusColor: Colors.black,
     hintText: 'Enter a value',
-    labelText: 'Value',
     helperStyle: TextStyle(
       color: Colors.green.shade400,
     ),
     focusedBorder: const UnderlineInputBorder(
       borderSide: BorderSide(
-        color: AppColors.primaryColor,
+        color: Colors.black,
         width: 2.0,
       ),
     ),
@@ -24,10 +23,10 @@ mixin AppTextFields {
       horizontal: 0,
     ),
     labelStyle: const TextStyle(
-      color: AppColors.primaryColor,
+      color: Colors.black,
     ),
-    hintStyle: TextStyle(
-      color: AppColors.secondaryTextColor,
+    hintStyle: const TextStyle(
+      color: Colors.black,
     ),
   );
 }

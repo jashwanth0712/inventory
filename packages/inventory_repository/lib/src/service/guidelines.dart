@@ -1,7 +1,7 @@
 part of './../admin.dart';
 
 class Guidelines {
-  final String url = '/guidelines';
+  final String url = URL.base + URL.admin + '/guidelines';
   final String token;
   Guidelines({
     this.token = '',
@@ -16,8 +16,8 @@ class Guidelines {
   }
 
   Future<dynamic> create({
-    required String productName,
-    required bool isAvailable,
+    required String title,
+    required List<String> description,
   }) async {
     final Uri parsedUrl = Uri.parse(url);
     var response = await http.post(
@@ -28,15 +28,15 @@ class Guidelines {
         'Authorization': 'Bearer $token'
       },
       body: jsonEncode(
-        <String, String?>{
-          'productName': productName,
-          'isAvailable': isAvailable.toString(),
+        <String, dynamic>{
+          'title': title,
+          'description': description,
         },
       ),
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -55,7 +55,7 @@ class Guidelines {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -85,7 +85,7 @@ class Guidelines {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
@@ -106,7 +106,7 @@ class Guidelines {
     );
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final error = jsonDecode(response.body);
       throw APIRequestError.fromMessage(error['message']);
